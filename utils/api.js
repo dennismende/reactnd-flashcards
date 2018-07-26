@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { setupAppWithDeckResults, DECKS_STORAGE_KEY } from './flashcard-dummy-data';
 
 export const getDecks = () => {
+  // AsyncStorage.clear();
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then(setupAppWithDeckResults);
 }
@@ -10,8 +11,16 @@ export const getDeck = () => {
 
 }
 
-export const createNewDeck = () => {
-
+export const createDeck = (deckTitle) => {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then(decks => {
+      const parsedDecks = JSON.parse(decks);
+      parsedDecks[deckTitle] = { title: deckTitle, questions: [] };
+      return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(parsedDecks))
+        .then(() => {
+          return parsedDecks[deckTitle];
+        });
+    });
 }
 
 export const addCardToDeck = () => {
