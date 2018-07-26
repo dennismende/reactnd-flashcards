@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchDecks as fetchDecksAction } from '../actions';
 import { getDecksSelector } from '../selectors';
 import { green, white } from '../utils/colors';
 
 class DeckOverview extends Component {
-  _renderItem = ({item}) => (
-    <View style={styles.tile}>
-      <Text style={styles.tileText}>{item.key}</Text>
-      <Text>{item.amountOfQuestions} Cards</Text>
-    </View>
+  navigateToDetailPage = (deck) => {
+    this.props.navigation.navigate('DeckDetail', {deckTitle: deck.key});
+  }
+
+  renderItem = ({item}) => (
+    <TouchableOpacity onPress={() => this.navigateToDetailPage(item)}>
+      <View style={styles.tile}>
+        <Text style={styles.tileText}>{item.key}</Text>
+        <Text>{item.amountOfQuestions} Cards</Text>
+      </View>
+    </TouchableOpacity>
   )
 
   componentDidMount() {
@@ -26,7 +32,7 @@ class DeckOverview extends Component {
       <View style={styles.container}>
         <FlatList
           data={decks}
-          renderItem={this._renderItem}
+          renderItem={this.renderItem}
         />
       </View>
     );

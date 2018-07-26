@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     padding: 20,
-    width: '60%'
+    alignSelf: 'stretch',
+    textAlign: 'center'
   },
   iosSubmitBtn: {
     backgroundColor: green,
@@ -85,7 +86,8 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     height: 45,
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
+    alignSelf: 'stretch'
   },
   AndroidSubmitBtn: {
     backgroundColor: green,
@@ -93,7 +95,8 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30,
     height: 45,
-    borderRadius: 2
+    borderRadius: 2,
+    alignSelf: 'stretch'
   },
   submitBtnText: {
     color: white,

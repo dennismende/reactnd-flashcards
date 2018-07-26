@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux'
 
-class NewDeckQuestion extends Component {
+class NewDeckCart extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>NewDeckQuestion</Text>
+        <Text>NewDeckCart</Text>
       </View>
     );
   }
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect()(NewDeckQuestion);
+export default connect()(NewDeckCart);

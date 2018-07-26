@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getDecks = (state) => state['decks'] ? state['decks'] : {};
+const getDeckKey = (state, props) => props;
 
 export const getDecksSelector = createSelector(
   getDecks,
@@ -14,4 +15,7 @@ export const getDecksSelector = createSelector(
   })
 );
 
-export default getDecksSelector;
+export const getDeckSelector = createSelector(
+  [getDecks, getDeckKey],
+  (decks, deckKey) => decks[deckKey]
+)

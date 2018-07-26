@@ -10,6 +10,8 @@ import store from './store/store';
 import DeckOverview from './components/DeckOverview';
 import NewDeck from './components/NewDeck';
 import DeckDetail from './components/DeckDetail';
+import NewDeckCart from './components/NewDeckCart';
+import DeckQuiz from './components/DeckQuiz';
 
 function FlashCardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -34,7 +36,25 @@ const MainNavigator = createStackNavigator({
         backgroundColor: green,
       }
     }
-  }
+  },
+  NewDeckCart: {
+    screen: NewDeckCart,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: green,
+      }
+    }
+  },
+  DeckQuiz: {
+    screen: DeckQuiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: green,
+      }
+    }
+  },
 });
 
 const TabNavigation = createBottomTabNavigator({
