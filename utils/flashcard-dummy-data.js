@@ -28,11 +28,11 @@ function setDummyData() {
     }
   };
 
-  AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(dummyData));
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
 
   return dummyData;
 }
 
 export function setupAppWithDeckResults(results) {
-  return result === null ? setDummyData() : JSON.parse(results);
+  return results === null ? setDummyData() : JSON.parse(results);
 }

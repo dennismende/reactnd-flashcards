@@ -1,19 +1,19 @@
 import { AsyncStorage } from 'react-native';
 import { setupAppWithDeckResults, DECKS_STORAGE_KEY } from './flashcard-dummy-data';
 
-export function getDecks() {
+export const getDecks = () => {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then(setupAppWithDeckResults);
 }
 
-export function getDeck() {
+export const getDeck = () => {
 
 }
 
-export function saveDeckTitle() {
+export const createNewDeck = () => {
 
 }
 
-export function addCardToDeck() {
+export const addCardToDeck = () => {
 
 }

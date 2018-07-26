@@ -6,7 +6,7 @@ import { green, white } from './utils/colors';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers';
+import store from './store/store';
 import DeckOverview from './components/DeckOverview';
 import NewDeck from './components/NewDeck';
 import DeckDetail from './components/DeckDetail';
@@ -19,9 +19,27 @@ function FlashCardsStatusBar ({backgroundColor, ...props}) {
   )
 }
 
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: DeckOverview,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: green,
+      }
+    }
+  }
+});
+
 const TabNavigation = createBottomTabNavigator({
   DeckOverview: {
-    screen: DeckOverview,
+    screen: MainNavigator,
     navigationOptions: {
       tabBarLabel: 'Deck Overview',
       tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
@@ -36,7 +54,6 @@ const TabNavigation = createBottomTabNavigator({
   },
 }, {
   navigationOptions: {
-    header: null
   },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? green : white,
@@ -54,28 +71,13 @@ const TabNavigation = createBottomTabNavigator({
   }
 });
 
-const MainNavigator = createStackNavigator({
-  Home: {
-    screen: TabNavigation,
-  },
-  DeckDetail: {
-    screen: DeckDetail,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: green,
-      }
-    }
-  }
-});
-
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(rootReducer)}>
+      <Provider store={store}>
         <View style={{flex: 1}}>
           <FlashCardsStatusBar backgroundColor={green} barStyle="light-content" />
-          <MainNavigator />
+          <TabNavigation />
         </View>
       </Provider>
     );
