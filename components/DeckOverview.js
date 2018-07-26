@@ -6,14 +6,6 @@ import { getDecksSelector } from '../selectors';
 import { green, white } from '../utils/colors';
 
 class DeckOverview extends Component {
-  static navigationOptions = ({ navigation }) => {
-    console.log('entryId', navigation.state.params);
-
-    return {
-      title: 'test'
-    }
-  }
-
   _renderItem = ({item}) => (
     <View style={styles.tile}>
       <Text style={styles.tileText}>{item.key}</Text>
