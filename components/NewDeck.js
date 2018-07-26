@@ -23,11 +23,18 @@ class NewDeck extends Component {
     this.props.navigation.navigate('DeckDetail', {deckTitle: newDeckTitle});
   }
 
+  resetComponentState = () => {
+    this.setState({newDeckTitle: ''});
+  }
+
   submit = () => {
     const { createDeck } = this.props;
     const { newDeckTitle } = this.state;
 
     createDeck(newDeckTitle);
+
+    this.resetComponentState();
+
     this.navigateToDeckDetailView(newDeckTitle);
   }
 
@@ -40,6 +47,7 @@ class NewDeck extends Component {
           placeholder="Enter new deck title"
           autoFocus={true}
           onChangeText={(text) => this.setState({newDeckTitle: text})}
+          value={this.state.newDeckTitle}
         />
         <SubmitBtn onPress={this.submit} />
       </View>
