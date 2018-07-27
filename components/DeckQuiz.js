@@ -35,6 +35,16 @@ const ShowAnswerBtn = ({ onPress }) => {
   )
 }
 
+const ShowQuestionBtn = ({ onPress }) => {
+  return (
+    <TouchableOpacity
+      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+      onPress={onPress}>
+        <Text style={[styles.submitBtnText, styles.info]}>Show Question</Text>
+    </TouchableOpacity>
+  )
+}
+
 class DeckQuiz extends Component {
   state = {
     quizScore: 0,
@@ -107,7 +117,7 @@ class DeckQuiz extends Component {
 
   render() {
     const { deck } = this.props;
-    const { areResultsVisible, quizScore, cardPosition } = this.state;
+    const { areResultsVisible, quizScore, cardPosition, isAnswerOfSelectedCardVisible } = this.state;
     const currentCard = this.getCurrentCardOfDeck(deck);
 
     return (
@@ -128,19 +138,25 @@ class DeckQuiz extends Component {
               perspective={1000}
               flipHorizontal={true}
               flipVertical={false}
-              flip={this.state.isAnswerOfSelectedCardVisible}
+              flip={isAnswerOfSelectedCardVisible}
               clickable={false}
             >
               {/* Face Side */}
               <View style={styles.flipcardItem}>
+                <Text style={styles.infoText}>Question</Text>
                 <Text style={styles.infoText}>{currentCard.question}</Text>
               </View>
               {/* Back Side */}
               <View style={styles.flipcardItem}>
+                <Text style={styles.infoText}>Answer</Text>
                 <Text style={styles.infoText}>{currentCard.answer}</Text>
               </View>
             </FlipCard>
-            <ShowAnswerBtn onPress={this.flipCard} />
+            {isAnswerOfSelectedCardVisible ? (
+              <ShowQuestionBtn onPress={this.flipCard} />
+            ) : (
+              <ShowAnswerBtn onPress={this.flipCard} />
+            )}
             <IncrementScoreBtn onPress={this.incrementScore} />
             <DecrementScoreBtn onPress={this.decrementScore} />
           </View>
