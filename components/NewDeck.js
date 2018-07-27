@@ -31,11 +31,10 @@ class NewDeck extends Component {
     const { createDeck } = this.props;
     const { newDeckTitle } = this.state;
 
-    createDeck(newDeckTitle);
-
-    this.resetComponentState();
-
-    this.navigateToDeckDetailView(newDeckTitle);
+    createDeck(newDeckTitle).then(() => {
+      this.resetComponentState();
+      this.navigateToDeckDetailView(newDeckTitle);
+    })
   }
 
   render() {
