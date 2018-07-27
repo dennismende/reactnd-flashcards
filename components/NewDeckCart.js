@@ -21,6 +21,10 @@ class NewDeckCart extends Component {
     answer: ''
   }
 
+  componentWillUnmount() {
+    this.resetComponentState();
+  }
+
   resetComponentState = () => {
     this.setState({
       question: '',
