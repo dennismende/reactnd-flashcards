@@ -7,10 +7,6 @@ export const getDecks = () => {
     .then(setupAppWithDeckResults);
 }
 
-export const getDeck = () => {
-
-}
-
 export const createDeck = (deckTitle) => {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then(decks => {

@@ -50,6 +50,7 @@ const MainNavigator = createStackNavigator({
   DeckQuiz: {
     screen: DeckQuiz,
     navigationOptions: {
+      headerTitle: 'Quiz',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: green,
