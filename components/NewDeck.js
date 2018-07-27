@@ -19,6 +19,10 @@ class NewDeck extends Component {
     newDeckTitle: ''
   }
 
+  componentWillUnmount() {
+    this.resetComponentState();
+  }
+
   navigateToDeckDetailView = (newDeckTitle) => {
     this.props.navigation.navigate('DeckDetail', {deckTitle: newDeckTitle});
   }
