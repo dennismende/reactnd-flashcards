@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import { green, white } from '../utils/colors';
 import { createDeck as createDeckAction } from '../actions';
@@ -43,17 +43,19 @@ class NewDeck extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behaviour="padding" enabled>
-        <Text style={styles.header}>What is the title of your new deck?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter new deck title"
-          autoFocus={true}
-          onChangeText={(text) => this.setState({newDeckTitle: text})}
-          value={this.state.newDeckTitle}
-        />
-        <SubmitBtn onPress={this.submit} />
-      </KeyboardAvoidingView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <KeyboardAvoidingView style={styles.container} behaviour="padding" enabled>
+          <Text style={styles.header}>What is the title of your new deck?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter new deck title"
+            autoFocus={true}
+            onChangeText={(text) => this.setState({newDeckTitle: text})}
+            value={this.state.newDeckTitle}
+          />
+          <SubmitBtn onPress={this.submit} />
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     );
   }
 };

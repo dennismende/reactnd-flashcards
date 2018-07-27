@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import { green, white } from '../utils/colors';
 import { addCartToDeck as addCartToDeckAction } from '../actions';
@@ -48,25 +48,27 @@ class NewDeckCart extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behaviour="padding" enabled>
-        <Text style={styles.header}>Question</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Add question here"
-          autoFocus={true}
-          onChangeText={(text) => this.setState({...this.state, question: text })}
-          value={this.state.question}
-        />
-        <Text style={styles.header}>Answer</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Add answer here"
-          autoFocus={false}
-          onChangeText={(text) => this.setState({...this.state, answer: text })}
-          value={this.state.answer}
-        />
-        <AddCartToDeckBtn onPress={this.submit}/>
-      </KeyboardAvoidingView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <KeyboardAvoidingView style={styles.container} behaviour="padding" enabled>
+          <Text style={styles.header}>Question</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Add question here"
+            autoFocus={true}
+            onChangeText={(text) => this.setState({...this.state, question: text })}
+            value={this.state.question}
+          />
+          <Text style={styles.header}>Answer</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Add answer here"
+            autoFocus={false}
+            onChangeText={(text) => this.setState({...this.state, answer: text })}
+            value={this.state.answer}
+          />
+          <AddCartToDeckBtn onPress={this.submit}/>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     );
   }
 };
