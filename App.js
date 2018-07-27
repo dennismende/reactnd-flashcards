@@ -40,6 +40,7 @@ const MainNavigator = createStackNavigator({
   NewDeckCart: {
     screen: NewDeckCart,
     navigationOptions: {
+      headerTitle: 'Add Cart',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: green,

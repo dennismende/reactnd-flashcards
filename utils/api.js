@@ -23,6 +23,14 @@ export const createDeck = (deckTitle) => {
     });
 }
 
-export const addCardToDeck = () => {
-
+export const addCardToDeck = (card, deck) => {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then(decks => {
+      const parsedDecks = JSON.parse(decks);
+      parsedDecks[deck.title].questions = [...parsedDecks[deck.title].questions, card]
+      return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(parsedDecks))
+        .then(() => {
+          return parsedDecks[deck.title];
+        });
+    });
 }
