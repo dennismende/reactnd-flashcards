@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import { connect } from 'react-redux';
 import { green, white } from '../utils/colors';
 import { getDeckSelector } from '../selectors';
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications';
 
 const AddCartBtn = ({ onPress }) => {
   return (
@@ -38,7 +39,11 @@ class DeckDetail extends Component {
   }
 
   navigateToStartQuizView = (deck) => {
-    this.props.navigation.navigate('DeckQuiz', {deck});
+    clearLocalNotification()
+      .then(() => {
+        setLocalNotification();
+        this.props.navigation.navigate('DeckQuiz', {deck});
+      });
   }
 
   render() {

@@ -12,6 +12,7 @@ import NewDeck from './components/NewDeck';
 import DeckDetail from './components/DeckDetail';
 import NewDeckCart from './components/NewDeckCart';
 import DeckQuiz from './components/DeckQuiz';
+import { setLocalNotification } from './utils/notifications';
 
 function FlashCardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -94,6 +95,10 @@ const TabNavigation = createBottomTabNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>
