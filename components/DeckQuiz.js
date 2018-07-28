@@ -45,6 +45,16 @@ const ShowQuestionBtn = ({ onPress }) => {
   )
 }
 
+const RestartQuizButton = ({ onPress }) => {
+  return (
+    <TouchableOpacity
+      style={Platform.OS === 'ios' ? [styles.iosSubmitBtn, styles.correct] : [styles.AndroidSubmitBtn, styles.correct]}
+      onPress={onPress}>
+        <Text style={styles.submitBtnText}>Restart Quiz</Text>
+    </TouchableOpacity>
+  )
+}
+
 class DeckQuiz extends Component {
   state = {
     quizScoreCorrect: 0,
@@ -102,6 +112,10 @@ class DeckQuiz extends Component {
     this.updateCardPosition();
   }
 
+  restartQuiz = () => {
+    this.resetComponentState();
+  }
+
   flipCard = () => {
     const { isAnswerOfSelectedCardVisible } = this.state;
 
@@ -132,6 +146,7 @@ class DeckQuiz extends Component {
           <View>
             <Text style={styles.infoText}>Your Score</Text>
             <Text style={finalQuizScore > 50 ? [styles.score, styles.goodScore] : [styles.score, styles.badScore]}>{finalQuizScore}% correct</Text>
+            <RestartQuizButton onPress={this.restartQuiz} />
           </View>
         ) : (
           <View style={styles.container}>
