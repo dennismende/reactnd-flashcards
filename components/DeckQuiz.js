@@ -47,7 +47,8 @@ const ShowQuestionBtn = ({ onPress }) => {
 
 class DeckQuiz extends Component {
   state = {
-    quizScore: 0,
+    quizScoreCorrect: 0,
+    quizScoreIncorrect: 0,
     cardPosition: 0,
     isAnswerOfSelectedCardVisible: false,
     areResultsVisible: false,
@@ -55,7 +56,8 @@ class DeckQuiz extends Component {
 
   resetComponentState = () => {
     this.setState(() => ({
-      quizScore: 0,
+      quizScoreCorrect: 0,
+      quizScoreIncorrect: 0,
       cardPosition: 0,
       isAnswerOfSelectedCardVisible: false,
       areResultsVisible: false,
@@ -79,22 +81,22 @@ class DeckQuiz extends Component {
   }
 
   incrementScore = () => {
-    const { quizScore } = this.state;
+    const { quizScoreCorrect } = this.state;
 
     this.setState((state) => ({
       ...state,
-      quizScore: quizScore + 1,
+      quizScoreCorrect: quizScoreCorrect + 1,
     }));
 
     this.updateCardPosition();
   }
 
   decrementScore = () => {
-    const { quizScore } = this.state;
+    const { quizScoreIncorrect } = this.state;
 
     this.setState((state) => ({
       ...state,
-      quizScore: quizScore - 1,
+      quizScoreIncorrect: quizScoreIncorrect + 1,
     }));
 
     this.updateCardPosition();
@@ -117,8 +119,9 @@ class DeckQuiz extends Component {
 
   render() {
     const { deck } = this.props;
-    const { areResultsVisible, quizScore, cardPosition, isAnswerOfSelectedCardVisible } = this.state;
+    const { areResultsVisible, quizScoreCorrect, cardPosition, isAnswerOfSelectedCardVisible } = this.state;
     const currentCard = this.getCurrentCardOfDeck(deck);
+    const finalQuizScore = Math.ceil((quizScoreCorrect * 100) / deck.questions.length);
 
     return (
       <View style={styles.container}>
@@ -128,7 +131,7 @@ class DeckQuiz extends Component {
         {areResultsVisible ? (
           <View>
             <Text style={styles.infoText}>Your Score</Text>
-            <Text style={quizScore > 0 ? [styles.score, styles.goodScore] : [styles.score, styles.badScore]}>{quizScore}</Text>
+            <Text style={finalQuizScore > 50 ? [styles.score, styles.goodScore] : [styles.score, styles.badScore]}>{finalQuizScore}% correct</Text>
           </View>
         ) : (
           <View style={styles.container}>
