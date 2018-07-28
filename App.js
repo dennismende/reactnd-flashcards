@@ -26,7 +26,7 @@ const MainNavigator = createStackNavigator({
   Home: {
     screen: DeckOverview,
     navigationOptions: {
-      header: null
+      header: null,
     }
   },
   DeckDetail: {
@@ -35,6 +35,9 @@ const MainNavigator = createStackNavigator({
       headerTintColor: white,
       headerStyle: {
         backgroundColor: green,
+      },
+      headerBackTitleStyle: {
+        paddingLeft: 40,
       }
     }
   },
@@ -58,6 +61,10 @@ const MainNavigator = createStackNavigator({
       }
     }
   },
+},{
+  headerMode: Platform.OS === 'ios' ? 'float' : 'screen',
+  headerLayoutPreset: Platform.OS === 'ios' ? 'center' : 'center',
+  headerBackTitleVisible: true,
 });
 
 const TabNavigation = createBottomTabNavigator({
